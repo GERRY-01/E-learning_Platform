@@ -34,8 +34,7 @@ function SignupPage() {
   };
 
   const handleGoogleSignup = () => {
-    // Google OAuth will be connected here later.
-    console.log("Continue with Google");
+    window.location.href = "http://localhost:8000/accounts/google/login/";
   };
 
   const handleGithubSignup = () => {
