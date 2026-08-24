@@ -32,3 +32,18 @@ def login_view(request):
             }, status=200)
         return Response({'error': 'Invalid credentials.'}, status=401)
     return Response(serializer.errors, status=400)
+
+@api_view(['GET'])
+def get_current_user(request):
+    print("USER:", request.user)
+    print("AUTHENTICATED:", request.user.is_authenticated)
+    print("SESSION KEY:", request.session.session_key)
+    print("COOKIES:", request.COOKIES)
+    if request.user.is_authenticated:
+        user_data = {
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email,
+        }
+        return Response(user_data, status=200)
+    return Response({'error': 'User not authenticated.'}, status=401)
